@@ -12,8 +12,16 @@
 </div>
 
 <div class="testResult" *ngIf="currentTest && currentTest.isCompleted && currentTest.result !== 0">
-  <span class="testResult-text">Результат теста линии: <b>{{currentTest.result}} импульсов</b></span>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 justify-content-center col-sm-9 justify-content-sm-start d-flex align-items-center pr-none">
+        <span class="testResult-text">Результат теста линии: <b>{{currentTest.result}} импульсов</b></span>
+      </div>
+      <div class="col-12 text-center col-sm-3 pl-none">
+        <button type="button" class="btn btn-light testResult-btnClear" (click)="onFinishTest()">Очистить</button>
+      </div>
 
-  <button type="button" class="btn btn-light" (click)="onFinishTest()">Очистить</button>
+    </div>
+  </div>
 </div>
 

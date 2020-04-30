@@ -20,6 +20,8 @@ export class AuthService {
   login(user: User): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/user.auth`, user).pipe(
       switchMap(response => {
+        alert(JSON.stringify(user));
+        alert(JSON.stringify(response));
         if (response.error) {
           return throwError(response);
         }

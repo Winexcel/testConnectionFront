@@ -21,9 +21,16 @@
 }
 
 .testResult {
-  margin-top: 20px;
-
   &-text {
+    text-align: center;
     margin-right: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .testResult {
+    &-btnClear {
+      margin-top: 10px;
+    }
   }
 }
