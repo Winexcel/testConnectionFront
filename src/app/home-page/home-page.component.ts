@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TestsService} from '../shared/services/tests.service';
 import {Test} from '../shared/interfaces';
 
@@ -7,7 +7,7 @@ import {Test} from '../shared/interfaces';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
 
   currentTest: Test;
   tickTimer = null;
@@ -27,7 +27,7 @@ export class HomePageComponent implements OnInit {
   }
 
   onStartTest() {
-    this.testsService.startTest(5).subscribe((test: Test) => {
+    this.testsService.startTest(30).subscribe((test: Test) => {
       console.log(test);
       this.currentTest = test;
       this.startTickTimer();
@@ -56,5 +56,9 @@ export class HomePageComponent implements OnInit {
     this.testsService.finishTesh().subscribe(test => {
       this.currentTest = test;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.stopTickTimer();
   }
 }
