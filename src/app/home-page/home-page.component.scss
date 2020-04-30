@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 56px);
+}
+
+.test {
+  max-width: 320px;
+  width: 320px;
+  text-align: center;
+
+  &-btn {
+    margin-bottom: 20px;
+  }
+}
+
+.testCurrent {
+  width: 50%;
+}
+
+.testResult {
+  margin-top: 20px;
+
+  &-text {
+    margin-right: 10px;
+  }
+}

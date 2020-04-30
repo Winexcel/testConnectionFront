@@ -1,0 +1,19 @@
+<div class="test" *ngIf="currentTest && currentTest.isCompleted && currentTest.result === 0">
+  <button type="button" class="test-btn btn btn-primary" (click)="onStartTest()">Начать тест</button>
+</div>
+
+
+<div class="testCurrent" *ngIf="currentTest && !currentTest.isCompleted && currentTest.currentValue > 0">
+  <div class="progress" #progress>
+    <div class="progress-bar" role="progressbar"
+         [style.width.px]="progress.offsetWidth/100 * ((currentTest.currentValue/currentTest.maxValue) * 100)"
+         aria-valuenow="0"></div>
+  </div>
+</div>
+
+<div class="testResult" *ngIf="currentTest && currentTest.isCompleted && currentTest.result !== 0">
+  <span class="testResult-text">Результат теста линии: <b>{{currentTest.result}} импульсов</b></span>
+
+  <button type="button" class="btn btn-light" (click)="onFinishTest()">Очистить</button>
+</div>
+

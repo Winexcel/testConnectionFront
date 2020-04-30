@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap-css-only/css/bootstrap.min.css";
+
+:root {
+  --primary-color: #dc3545;
+  --dark-color: #333333;
+  --light-color: #f4f4f4;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+}
+
+html, body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #fff;
+  color: #333;
+}
+
+.progress {
+  border-radius: 0;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+}
+
+
+.invalid {
+  color: var(--primary-color);
+}
+
+.validations {
+  margin: 5px 0;
+}
+
+

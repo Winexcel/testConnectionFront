@@ -1,0 +1,24 @@
+<form class="formSignin" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+  <h5 class="formSignin-header">Введите данные для входа</h5>
+  <div class="form-group">
+    <input type="text" id="inputEmail" [class.invalid]="form.get('login').invalid" class="form-control formSignin-firstInput" placeholder="Логин"
+           required="" autofocus formControlName="login">
+    <div *ngIf="form.get('login').touched && form.get('login').invalid" class="validations invalid">
+      <span *ngIf="form.get('login').errors.required">Введите логин</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="password" id="inputPassword" [class.invalid]="form.get('password').invalid" class="form-control formSignin-secondInput" type="password"
+           placeholder="Пароль" required="" formControlName="password">
+    <div *ngIf="form.get('password').touched && form.get('password').invalid" class="validations invalid">
+      <span *ngIf="form.get('password').errors.required">Введите пароль</span>
+      <span *ngIf="form.get('password').errors.minlength">Пароль должен быть не менее {{form.get('password').errors.minlength.requiredLength}} символов</span>
+    </div>
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="form.invalid">Вход</button>
+</form>
+
