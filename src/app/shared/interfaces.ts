@@ -9,3 +9,8 @@ export interface Test {
   result: number;
   isCompleted: boolean;
 }
+
+export interface PostParam {
+  name: string;
+  value: string;
+}

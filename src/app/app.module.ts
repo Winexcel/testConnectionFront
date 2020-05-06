@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {HomePageComponent} from './home-page/home-page.component';
-import {NeedAuthorizationComponent} from './shared/components/need-authorization/need-authorization.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from './shared/services/auth.guard';
@@ -17,7 +16,6 @@ import {AuthGuard} from './shared/services/auth.guard';
     MainLayoutComponent,
     LoginPageComponent,
     HomePageComponent,
-    NeedAuthorizationComponent,
   ],
   imports: [
     BrowserModule,

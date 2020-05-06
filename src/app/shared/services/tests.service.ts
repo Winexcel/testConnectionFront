@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
-import {Test} from '../interfaces';
+import {PostParam, Test} from '../interfaces';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -14,31 +14,42 @@ export class TestsService {
   constructor(private authService: AuthService, private http: HttpClient) {
   }
 
-  startTest(value: number) {
+  // TODO: вынести функцию в shared модуль, чтобы любой сервис мог ей воспользоваться
+  preparePost(postParams: PostParam[]) {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
 
     const body = new URLSearchParams();
-    body.set('value', value.toString());
-    body.set('accessToken', this.authService.token);
+    postParams.forEach(param => {
+      body.set(param.name, param.value.toString());
+    });
 
-    return this.http.post<any>(`${environment.apiUrl}/user.startTest`, body.toString(), options).pipe(
+    return {
+      body,
+      options,
+    };
+  }
+
+  startTest(value: number) {
+    const post = this.preparePost([
+      {name: 'value', value: value.toString()},
+      {name: 'accessToken', value: this.authService.token},
+    ]);
+
+    return this.http.post<any>(`${environment.apiUrl}/user.startTest`, post.body.toString(), post.options).pipe(
       map(response => {
         return (response.response as Test);
       })
-    );;
+    );
   }
 
   getTest(): Observable<Test> {
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    };
+    const post = this.preparePost([
+      {name: 'accessToken', value: this.authService.token},
+    ]);
 
-    const body = new URLSearchParams();
-    body.set('accessToken', this.authService.token);
-
-    return this.http.post<any>(`${environment.apiUrl}/user.getTest`, body.toString(), options).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/user.getTest`, post.body.toString(), post.options).pipe(
       map(response => {
         return (response.response as Test);
       })
@@ -46,14 +57,11 @@ export class TestsService {
   }
 
   tick(): Observable<Test> {
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    };
+    const post = this.preparePost([
+      {name: 'accessToken', value: this.authService.token},
+    ]);
 
-    const body = new URLSearchParams();
-    body.set('accessToken', this.authService.token);
-
-    return this.http.post<any>(`${environment.apiUrl}/user.tick`, body.toString(), options).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/user.tick`, post.body.toString(), post.options).pipe(
       map(response => {
         return (response.response as Test);
       })
@@ -61,14 +69,11 @@ export class TestsService {
   }
 
   finishTesh(): Observable<Test> {
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    };
+    const post = this.preparePost([
+      {name: 'accessToken', value: this.authService.token},
+    ]);
 
-    const body = new URLSearchParams();
-    body.set('accessToken', this.authService.token);
-
-    return this.http.post<any>(`${environment.apiUrl}/user.finishTest`, body.toString(), options).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/user.finishTest`, post.body.toString(), post.options).pipe(
       map(response => {
         return (response.response as Test);
       })
